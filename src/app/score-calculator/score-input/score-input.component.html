@@ -1,0 +1,19 @@
+<form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+    <div class="form-row  frm-row">
+      <div class="form-group col-md-6">
+        <label>First Throw</label>
+        <input name="FirstThrow" #FirstThrow="ngModel" [(ngModel)]="service.frame.FirstThrow" class="form-control" (keypress)="allowedInput($event)" maxlength="1" required>
+      </div>
+      <div class="form-group  col-md-6">
+        <label>Second Throw</label>
+        <input name="SecondThrow" #SecondThrow="ngModel" [(ngModel)]="(service.frames.length < 9 && service.frame.FirstThrow == 'X') ? '-' : service.frame.SecondThrow" [class]="(service.frames.length < 9 && service.frame.FirstThrow == 'X') ? 'form-control frm-control-disabled' : 'form-control'" (keypress)="allowedInput($event)" maxlength="1" required>
+      </div> 
+      <div [class]="(service.frames.length == 9 && ((service.frame.FirstThrow == 'X' && service.frame.SecondThrow != 'X' && service.frame.SecondThrow != null) ||(service.frame.FirstThrow != 'X' && service.frame.SecondThrow == '/'))) ? 'form-group  col-md-6' : 'hide'">
+        <label>Third Throw</label>
+        <input name="ThirdThrow" #ThirdThrow="ngModel" [(ngModel)]="service.frame.ThirdThrow" class="form-control" (keypress)="allowedInput($event)" maxlength="1" [required]="(service.frames.length == 9 && ((service.frame.FirstThrow == 'X' && service.frame.SecondThrow != 'X'  && service.frame.SecondThrow != null) ||(service.frame.FirstThrow != 'X' && service.frame.SecondThrow == '/'))) ? 'true' : 'false'">
+      </div> 
+    </div>
+    <div class="form-group frm-row">
+      <button type="submit" [disabled]="form.invalid || service.frames.length >= 10" class="btn btn-lg btn-block">SUBMIT</button>
+    </div>
+  </form>  

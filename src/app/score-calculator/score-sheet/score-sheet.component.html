@@ -1,0 +1,19 @@
+<table class="table">
+    <tr>
+        <th>Round</th>
+        <th>First Throw</th>
+        <th>Second Throw</th>
+        <th [class] = "service.frames.length == 10 ? '' : 'hide'">Third Throw</th>
+    </tr>
+    <tr *ngFor="let frame of service.frames; let i = index">
+      <td>{{i+1}}</td>
+      <td>{{frame.FirstThrow}}</td>
+      <td>{{frame.SecondThrow}}</td>
+      <td [class] = "service.frames.length == 10 ? '' : 'hide'">{{frame.ThirdThrow}}</td>
+    </tr>
+    <tr>
+        <td class="td-final-score" colspan="2">Final Score</td>
+        <td [class] = "service.frames.length == 10 ? '' : 'hide'"></td>
+        <td class="td-final-score">{{service.finalScore}}</td>
+    </tr>
+  </table>
